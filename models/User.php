@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use yii\db\Query;
+
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
     public $id;
@@ -26,7 +28,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'accessToken' => '101-token',
         ],
     ];
-
 
     /**
      * {@inheritdoc}
@@ -100,5 +101,29 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    /**
+     * 获取用户
+     * @param $object
+     * @return null|static
+     */
+    static function getByWechatInfo($object)
+    {
+        $id = $key = '';
+        switch ($object->getScenario()) {
+            case 'snsapiBase':
+                $id = $object->openId;
+                break;
+            case 'snsapiUserinfo':
+                $id = $object->openId;
+                break;
+            case 'snsapiLogin':
+                $id = $object->unionId;
+                break;
+        }
+
+        $user = (new Query())->where([$key => $id])->one();
+        return $user ? new static($user) : null;
     }
 }

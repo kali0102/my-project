@@ -9,7 +9,15 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
+    ],
+    'modules' => [
+        'manage' => [
+            'class' => 'app\modules\manage\Module',
+        ],
+        'h5' => [
+            'class' => 'app\modules\h5\Module',
+        ],
     ],
     'components' => [
         'request' => [
