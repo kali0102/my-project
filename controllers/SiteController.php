@@ -61,9 +61,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo Yii::$app->getUrlManager()->createAbsoluteUrl(['/h5/goods/view', 'id' => 3]);
+//        echo Yii::$app->getUrlManager()->createAbsoluteUrl(['/h5/goods/view', 'id' => 3]);
+//
+//        die;
 
-        die;
+//
+//
+//        echo '<pre>';
+//        var_export(get_defined_constants());
+//        die;
         return $this->render('index');
     }
 
